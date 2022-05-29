@@ -13,7 +13,7 @@ public class Rotor {
                 put(4, new Pair<>("ESOVPZJAYQUIRHXLNFTGKDCMWB", 'J'));
                 put(5, new Pair<>("VZBRGITYUPSDNHLXAWMJQOFECK", 'Z'));
             }};
-    private final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private String wheel;
     private int ringSetting;
@@ -26,8 +26,8 @@ public class Rotor {
         this.wheel = possibleWheels.get(wheelNumber).first;
         this.ringSetting = ringSetting % 26;
         this.turned = -(ringSetting % 26);
-        this.turnover = (char) (((((int) (possibleWheels
-                .get(wheelNumber).second)) - 65 - this.ringSetting) + 26) % 26 + 65);
+        this.turnover = Utility.chr(
+                Utility.modulus((Utility.ord(possibleWheels.get(wheelNumber).second) - 65 + this.ringSetting), 26) + 65);
     }
 
     public char getTurnover() {
@@ -45,17 +45,14 @@ public class Rotor {
         if (letter < 'A' || letter > 'Z') {
             throw new Exception("not an uppercase letter");
         }
-        return alphabet
-                .charAt(((((int) (this.wheel
-                        .charAt((((int) (letter)) - 65 + this.turned) % 26))) - 65 - this.turned) + 26) % 26);
+        return this.wheel.charAt(Utility.modulus(Utility.ord(letter) - 65 + this.turned, 26));
     }
 
     public char useBackwards(char letter) throws Exception {
         if (letter < 'A' || letter > 'Z') {
             throw new Exception("not an uppercase letter");
         }
-        return alphabet.charAt((this.wheel
-                .indexOf(((char) ((((int) (letter)) - 65 + this.turned) % 26 + 65))) - this.turned + 26) % 26);
+        return alphabet.charAt(Utility.modulus(this.wheel.indexOf(letter) + this.turned, 26));
     }
 
 }
