@@ -20,6 +20,10 @@ public class Rotor {
     private int turned;
     private char turnover;
 
+    /**
+     * @param wheelNumber the specific wheel used in this rotor
+     * @param ringSetting the setting of the ring in this rotor
+     */
     public Rotor(int wheelNumber, int ringSetting) {
         this.wheel = possibleWheels.get(wheelNumber).first;
         this.ringSetting = ringSetting % 26;
@@ -32,6 +36,10 @@ public class Rotor {
         return this.turnover;
     }
 
+    /**
+     * turns the rotor by 1
+     * @return the position from which the rotor turned
+     */
     public char turn() {
         char initial = alphabet.charAt((26 + this.turned) % 26);
         this.turned++;
