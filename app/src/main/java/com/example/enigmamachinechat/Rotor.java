@@ -20,9 +20,7 @@ public class Rotor {
     private int turned;
     private char turnover;
 
-    public Rotor(int wheelNumber, int ringSetting) throws Exception {
-        if (wheelNumber < 1 || wheelNumber > 5)
-            throw new Exception("invalid wheel number");
+    public Rotor(int wheelNumber, int ringSetting) {
         this.wheel = possibleWheels.get(wheelNumber).first;
         this.ringSetting = ringSetting % 26;
         this.turned = -(ringSetting % 26);
@@ -41,17 +39,21 @@ public class Rotor {
         return initial;
     }
 
-    public char use(char letter) throws Exception {
-        if (letter < 'A' || letter > 'Z') {
-            throw new Exception("not an uppercase letter");
-        }
+    /**
+     * Sends a letter through the rotor, encrypting it
+     * @param letter the letter sent in
+     * @return the letter after encryption
+     */
+    public char use(char letter) {
         return this.wheel.charAt(Utility.modulus(Utility.ord(letter) - 65 + this.turned, 26));
     }
 
-    public char useBackwards(char letter) throws Exception {
-        if (letter < 'A' || letter > 'Z') {
-            throw new Exception("not an uppercase letter");
-        }
+    /**
+     * Sends a letter through the rotor backwards, meaning sent through the other side
+     * @param letter letter sent it
+     * @return encrypted letter
+     */
+    public char useBackwards(char letter) {
         return alphabet.charAt(Utility.modulus(this.wheel.indexOf(letter) + this.turned, 26));
     }
 
