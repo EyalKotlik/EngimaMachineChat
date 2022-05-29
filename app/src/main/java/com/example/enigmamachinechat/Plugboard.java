@@ -3,6 +3,7 @@ package com.example.enigmamachinechat;
 import androidx.core.util.Pair;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Plugboard {
@@ -11,7 +12,7 @@ public class Plugboard {
     /**
      * @param plugs pairs of connected letters
      */
-    public Plugboard(Set<Pair<Character, Character>> plugs) {
+    public Plugboard(HashSet<Pair<Character, Character>> plugs) {
         this.plugs = new HashMap<Character, Character>() {{
             for (char letter = 'A'; letter <= 'Z'; letter++)
                 put(letter, letter);
