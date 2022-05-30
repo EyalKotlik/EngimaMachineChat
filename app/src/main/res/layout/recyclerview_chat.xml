@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageViewIcon"
@@ -17,21 +17,26 @@
 
     <TextView
         android:id="@+id/textViewGroupName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="groupName"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/textViewLastMessageTime"
         app:layout_constraintStart_toEndOf="@+id/imageViewIcon"
         app:layout_constraintTop_toTopOf="@+id/imageViewIcon" />
 
     <TextView
         android:id="@+id/textViewLastMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="1234: message"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewIcon"
+        app:layout_constraintEnd_toStartOf="@+id/textViewUnreadMessageCount"
         app:layout_constraintStart_toStartOf="@+id/textViewGroupName" />
 
     <TextView
@@ -45,12 +50,24 @@
 
     <TextView
         android:id="@+id/textViewUnreadMessageCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#F44336"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/burgundy_circle"
         android:text="12"
-        android:textColor="@color/black"
+        android:textColor="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLastMessage"
         app:layout_constraintEnd_toEndOf="@+id/textViewLastMessageTime"
-        app:layout_constraintStart_toStartOf="@+id/textViewLastMessageTime" />
+        app:layout_constraintStart_toStartOf="@+id/textViewLastMessageTime"
+        app:layout_constraintTop_toTopOf="@+id/textViewLastMessage" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon" />
 </androidx.constraintlayout.widget.ConstraintLayout>
