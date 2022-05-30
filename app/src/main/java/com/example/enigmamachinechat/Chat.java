@@ -2,6 +2,7 @@ package com.example.enigmamachinechat;
 
 import android.graphics.Bitmap;
 
+// data class holding the data for each recyclerView chat
 public class Chat {
     private String name, lastMessage, lastMessageTime;
     private Bitmap icon;

@@ -40,6 +40,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         return chats.size();
     }
 
+    // a class holding all the references to all the Views in the recycler view
     public static class ChatViewHolder extends RecyclerView.ViewHolder{
         public TextView textViewName, textViewLastMessage, textViewLastMessageTime, textViewUnreadMessagesCount;
         public ImageView imageViewIcon;
