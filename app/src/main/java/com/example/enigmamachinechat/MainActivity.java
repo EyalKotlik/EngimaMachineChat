@@ -7,10 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.enigmamachinechat.EnigmaMachine;
 
@@ -25,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        Button testButton = (Button) findViewById(R.id.buttonEnigmaMachineSettings);
+
+        testButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                moveToChat(view);
+            }
+        });
+
 
         // test data, to be replaced by the data base late
         ArrayList<Chat> chats = new ArrayList<>();
@@ -38,5 +51,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         ChatAdapter chatAdapter = new ChatAdapter(chats);
         recyclerView.setAdapter(chatAdapter);
+    }
+
+    private void moveToChat(View view){
+        startActivity(new Intent(this, ChatActivity.class));
     }
 }

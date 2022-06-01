@@ -21,7 +21,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     @NonNull
     @Override
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View chatView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_chats,parent, false);
+        View chatView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_chats, parent, false);
         return new ChatViewHolder(chatView);
     }
 
@@ -41,11 +41,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     }
 
     // a class holding all the references to all the Views in the recycler view
-    public static class ChatViewHolder extends RecyclerView.ViewHolder{
+    public static class ChatViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewName, textViewLastMessage, textViewLastMessageTime, textViewUnreadMessagesCount;
         public ImageView imageViewIcon;
 
-        public ChatViewHolder(@NonNull View itemView){
+        public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
             this.textViewName = itemView.findViewById(R.id.textViewGroupName);
             this.textViewLastMessage = itemView.findViewById(R.id.textViewLastMessage);

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/buttonReturn"
+        android:id="@+id/imageButtonReturn"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -21,9 +21,9 @@
         android:id="@+id/imageViewGroupIcon"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonReturn"
-        app:layout_constraintStart_toEndOf="@+id/buttonReturn"
-        app:layout_constraintTop_toTopOf="@+id/buttonReturn"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonReturn"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonReturn"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonReturn"
         app:srcCompat="@drawable/chat_test_icon" />
 
     <TextView
@@ -31,27 +31,31 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton9"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonEnigmaMachine"
         app:layout_constraintStart_toEndOf="@+id/imageViewGroupIcon"
         app:layout_constraintTop_toTopOf="@+id/imageViewGroupIcon" />
 
     <TextView
         android:id="@+id/textViewGroupMembers"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewGroupIcon"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton9"
-        app:layout_constraintStart_toEndOf="@+id/imageViewGroupIcon" />
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonEnigmaMachine"
+        app:layout_constraintStart_toEndOf="@+id/imageViewGroupIcon"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGroupNameTitle" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/imageButtonGroupSettings"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
@@ -63,14 +67,14 @@
         app:srcCompat="@drawable/settings_icon" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/imageButtonEnigmaMachine"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:background="#00FFFFFF"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewGroupIcon"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton7"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonGroupSettings"
         app:layout_constraintTop_toTopOf="@+id/imageViewGroupIcon"
         app:srcCompat="@drawable/enigma_machine" />
 
@@ -85,11 +89,16 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewGroupIcon" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMessages"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/mettalic_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        app:layout_constraintVertical_bias="1.0"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
