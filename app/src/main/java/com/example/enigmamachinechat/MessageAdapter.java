@@ -10,11 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private ArrayList<Message> messages;
 
     public MessageAdapter(ArrayList<Message> messages) {
+        Collections.reverse(messages);
         this.messages = messages;
     }
 
