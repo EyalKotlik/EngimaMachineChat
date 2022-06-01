@@ -22,38 +22,42 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnChatListener{
+    private ArrayList<Chat> chats;
+
+    //UI elements
+    private Button btn1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        Button testButton = (Button) findViewById(R.id.buttonEnigmaMachineSettings);
-
-        testButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                moveToChat(view);
-            }
-        });
-
 
         // test data, to be replaced by the data base late
-        ArrayList<Chat> chats = new ArrayList<>();
+        chats = new ArrayList<>();
         Bitmap testImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.chat_test_icon);
+        ArrayList<String> members = new ArrayList<String>();
+        members.add("first");
+        members.add("second");
         for (int i = 0; i < 50; i++)
-            chats.add(new Chat("Group" + i, "Hi " + i, "12:0" + i, testImage, i));
+            chats.add(new Chat("Group" + i, "Hi " + i, "12:0" + i, testImage, i, members));
 
         // creates and deploys the recyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerViewChats);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        ChatAdapter chatAdapter = new ChatAdapter(chats);
+        ChatAdapter chatAdapter = new ChatAdapter(chats, this);
         recyclerView.setAdapter(chatAdapter);
     }
 
-    private void moveToChat(View view){
-        startActivity(new Intent(this, ChatActivity.class));
+
+
+    @Override
+    public void onChatClick(int position) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra("groupName", chats.get(position).getName());
+        intent.putExtra("groupMembers", chats.get(position).getChatMemebrs());
+        startActivity(intent);
     }
 }

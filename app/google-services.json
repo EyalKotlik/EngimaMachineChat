@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1093656763463",
+    "project_id": "enigma-machine-chat",
+    "storage_bucket": "enigma-machine-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093656763463:android:14cfa74c5a6c816177e562",
+        "android_client_info": {
+          "package_name": "com.example.enigmamachinechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093656763463-eb1hban2n7sqn0qrf1pvkbej00lr90h3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBunn1-XuUZcB_xPNWMTp_-WdXroFYtx5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1093656763463-eb1hban2n7sqn0qrf1pvkbej00lr90h3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

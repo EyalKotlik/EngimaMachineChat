@@ -25,3 +25,4 @@ public final class Utility {
         return (int)chr;
     }
 }
+
