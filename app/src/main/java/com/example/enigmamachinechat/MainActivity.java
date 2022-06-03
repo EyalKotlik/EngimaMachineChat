@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +31,9 @@ import com.example.enigmamachinechat.EnigmaMachine;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -42,60 +45,23 @@ import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.READ_SMS;
 
 public class MainActivity extends AppCompatActivity implements OnChatListener {
+    public static final String TAG = "MainActivity";
     private ArrayList<Chat> chats;
-    private String email;
+    private String email, password;
     private FirebaseAuth firebaseAuth;
-    private Context context;
+
     //UI elements
-    private Button btn1;
+    private Button buttonLogIn, buttonRegister;
+    private EditText editTextEmail, editTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        firebaseAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        context = this;
 
-        //sign in prompt
-        ActionCodeSettings actionCodeSettings =
-                ActionCodeSettings.newBuilder()
-                        // URL you want to redirect back to. The domain (www.example.com) for this
-                        // URL must be whitelisted in the Firebase Console.
-                        .setUrl("https://www.example.com/finishSignUp?cartId=1234")
-                        // This must be true
-                        .setHandleCodeInApp(true)
-                        .setIOSBundleId("com.example.ios")
-                        .setAndroidPackageName(
-                                "com.example.android",
-                                true, /* installIfNotAvailable */
-                                "12"    /* minimumVersion */
-                        )
-                        .build();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(R.layout.activity_authentication);
-        builder.setPositiveButton(
-                com.google.android.gms.base.R.string.common_signin_button_text,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        email = ((EditText) findViewById(R.id.editTextTextEmailAddress)).toString();
-                    }
-                }
-        );
-        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                Toast.makeText(context, "must sign in to continue", Toast.LENGTH_SHORT).show();
-            }
-        });
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.sendSignInLinkToEmail(email, actionCodeSettings)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("TAG", "Email sent.");
-                        }
-                    }
-                });
+
 
         // test data, to be replaced by the data base late
         chats = new ArrayList<>();
@@ -124,4 +90,68 @@ public class MainActivity extends AppCompatActivity implements OnChatListener {
         startActivity(intent);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        if(firebaseAuth.getCurrentUser() != null){
+            return;
+        }
+        setContentView(R.layout.activity_authentication);
+        buttonLogIn = (Button)findViewById(R.id.buttonLogIn);
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        editTextEmail = (EditText)findViewById(R.id.editTextTextEmailAddress);
+        editTextPassword = (EditText) findViewById(R.id.editTextTextPassword);
+
+        buttonLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                email = editTextEmail.getText().toString();
+                password = editTextPassword.getText().toString();
+                if (email == null || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() || password == null){
+                    Toast.makeText(MainActivity.this , "invalid email or password", Toast.LENGTH_SHORT).show(); return;}
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    setContentView(R.layout.activity_main);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(MainActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                email = editTextEmail.getText().toString();
+                password = editTextPassword.getText().toString();
+                if (email == null || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() || password == null){
+                    Toast.makeText(MainActivity.this , "invalid email or password", Toast.LENGTH_SHORT).show(); return;}
+                firebaseAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    setContentView(R.layout.activity_main);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(MainActivity.this, "Registration failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
+    }
 }
