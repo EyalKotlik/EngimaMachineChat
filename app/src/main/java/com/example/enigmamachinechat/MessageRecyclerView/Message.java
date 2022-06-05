@@ -1,4 +1,4 @@
-package com.example.enigmamachinechat;
+package com.example.enigmamachinechat.MessageRecyclerView;
 
 // data class holding data for each recyclerView message
 public class Message {

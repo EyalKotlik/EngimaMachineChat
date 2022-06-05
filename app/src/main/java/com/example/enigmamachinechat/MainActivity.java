@@ -29,6 +29,10 @@ import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
+import com.example.enigmamachinechat.ChatRecyclerView.Chat;
+import com.example.enigmamachinechat.ChatRecyclerView.ChatAdapter;
+import com.example.enigmamachinechat.ChatRecyclerView.OnChatListener;
+import com.example.enigmamachinechat.EnigmaMachine.EnigmaMachine;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnChatListener {
     private ArrayList<Chat> chats;
     private FirebaseAuth firebaseAuth;
 
+    private EnigmaMachine enigma;
     //UI elements
     private ImageButton imageButtonMainEnigmaMachine, imageButtonSettingsMain, imageButtonSignOut;
     private RecyclerView recyclerView;

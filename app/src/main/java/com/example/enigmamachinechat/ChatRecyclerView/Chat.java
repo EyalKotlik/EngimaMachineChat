@@ -1,4 +1,4 @@
-package com.example.enigmamachinechat;
+package com.example.enigmamachinechat.ChatRecyclerView;
 
 import android.graphics.Bitmap;
 

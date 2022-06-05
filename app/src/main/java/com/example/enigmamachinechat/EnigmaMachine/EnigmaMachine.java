@@ -1,4 +1,4 @@
-package com.example.enigmamachinechat;
+package com.example.enigmamachinechat.EnigmaMachine;
 
 import android.util.Log;
 

@@ -1,7 +1,9 @@
-package com.example.enigmamachinechat;
+package com.example.enigmamachinechat.EnigmaMachine;
 
 import android.util.Log;
 import android.util.Pair;
+
+import com.example.enigmamachinechat.Utility;
 
 import java.util.HashMap;
 

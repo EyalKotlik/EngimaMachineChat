@@ -14,6 +14,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.enigmamachinechat.MessageRecyclerView.Message;
+import com.example.enigmamachinechat.MessageRecyclerView.MessageAdapter;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
